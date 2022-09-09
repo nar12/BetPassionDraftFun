@@ -1,14 +1,15 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.BetPass;
+import pages.LoginPage;
+import pages.RegistrationPage;
 
 public class BaseTest {
     public static WebDriver webDriver;
     public BetPass betPass;
+    public LoginPage loginPage;
+    public RegistrationPage registrationPage;
     String username = "nar12";
     String password = "asd456";
 
@@ -17,6 +18,8 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
+        loginPage = new LoginPage(webDriver);
+        registrationPage = new RegistrationPage(webDriver);
         betPass = new BetPass(webDriver);
     }
 
@@ -26,37 +29,47 @@ public class BaseTest {
     }
 
     @Test
+    public void openRegistrationPage() {
+        registrationPage.openRegistrationPage();
+    }
+
+    @Test
     public void registration() {
-        betPass.correctRegistration(username, password);
-    }
-
-    @Test
-    public void logIn() {
-        betPass.correctLogIn(username, password);
-    }
-
-    @Test
-    public void wrongPassLogIn() throws InterruptedException {
-        betPass.wrongPasswordLogIn(username, password);
-    }
-
-    @Test
-    public void wrongUserLogIn() throws InterruptedException {
-        betPass.wrongUserNameLogIn(username, password);
+        registrationPage.openRegistrationPage().correctRegistration(username, password);
     }
 
     @Test
     public void wrongRegister() {
-        betPass.wrongRegistration(username, password);
+        registrationPage.openRegistrationPage().wrongRegistration(username, password);
     }
 
     @Test
-    public void checkRegCheckBox(){
-        betPass.checkRegistrationCheckBox();
+    public void checkRegCheckBox() {
+        registrationPage.openRegistrationPage().checkRegistrationCheckBox();
     }
 
     @Test
     public void checkSameUserNameRegister() throws InterruptedException {
-        betPass.checkSameUserNameRegistration(username,password);
+        registrationPage.openRegistrationPage().checkSameUserNameRegistration(username, password);
+    }
+
+    @Test
+    public void openLoginPage() {
+        loginPage.openLoginPage();
+    }
+
+    @Test
+    public void logIn() {
+        loginPage.openLoginPage().correctLogIn(username, password);
+    }
+
+    @Test
+    public void wrongPassLogIn() throws InterruptedException {
+        loginPage.openLoginPage().wrongPasswordLogIn(username, password);
+    }
+
+    @Test
+    public void wrongUserLogIn() throws InterruptedException {
+        loginPage.openLoginPage().wrongUserNameLogIn(username, password);
     }
 }
