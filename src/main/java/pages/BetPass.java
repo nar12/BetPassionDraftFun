@@ -21,6 +21,7 @@ public class BetPass {
     public BetPass openBetPassSite() {
         WD.get("https://betpassionfun.draft10.com/");
 
+        Assert.assertEquals("https://betpassionfun.draft10.com/", WD.getCurrentUrl());
         return this;
     }
 }

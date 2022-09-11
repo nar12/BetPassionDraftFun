@@ -14,111 +14,85 @@ import java.time.Duration;
 public class RegistrationPage {
     public WebDriver WD;
     @FindBy(xpath = "//input[@id='username']")
-    WebElement username;
+    WebElement _username;
     @FindBy(xpath = "//input[@id='password']")
-    WebElement password;
+    WebElement _password;
     @FindBy(xpath = "//input[@id='repeatPassword']")
-    WebElement repeatPassword;
+    WebElement _repeatPassword;
     @FindBy(xpath = "//input[@id='firstCheck']")
-    WebElement firstCheck;
+    WebElement _firstCheck;
     @FindBy(xpath = "//input[@id='secondCheck']")
-    WebElement secondCheck;
+    WebElement _secondCheck;
     @FindBy(xpath = "//button[text() = 'Sign up']")
-    WebElement signUp;
-    By registerBtn = By.xpath("//button[contains(@class,'button btn button--secondary-rounded')]");
+    WebElement _signUp;
+    //@FindBy(xpath = "//button[contains(@class,'button btn button--secondary-rounded')]")
+    By _registerBtn = By.xpath("//button[contains(@class,'button btn button--secondary-rounded')]");
 
     public RegistrationPage(WebDriver webDriver) {
         this.WD = webDriver;
         PageFactory.initElements(WD, this);
     }
 
-    public RegistrationPage openRegistrationForm() {
-        WebElement regBtn = (new WebDriverWait(WD, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(registerBtn)));
-        regBtn.click();
+    public RegistrationPage openRegistrationPage() {
+        WebElement registerBtn = (new WebDriverWait(WD, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(_registerBtn)));
+        registerBtn.click();
 
-        return this;
-    }
-
-    public RegistrationPage enterUsername(String uName) {
-        username.clear();
-        username.sendKeys(uName);
-
-        return this;
-    }
-
-    public RegistrationPage enterPassword(String pswd) {
-        password.clear();
-        password.sendKeys(pswd);
-
-        return this;
-    }
-
-    public RegistrationPage enterRepeatPassword(String pswd) {
-        repeatPassword.clear();
-        repeatPassword.sendKeys(pswd);
-
-        return this;
-    }
-
-    public RegistrationPage clickSignUpButton() {
-        signUp.click();
-
-        return this;
-    }
-
-    public RegistrationPage clickFirstCheck() {
-        firstCheck.click();
-
-        return this;
-    }
-
-    public RegistrationPage clickSecondCheck() {
-        secondCheck.click();
-
-        return this;
-    }
-
-    public RegistrationPage checkRegPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/register", WD.getCurrentUrl());
-
         return this;
     }
 
-    public RegistrationPage checkRegistrationSuccess() {
+    public RegistrationPage correctRegistration(String username, String password) {
+        _username.sendKeys(username);
+        _password.sendKeys(password);
+        _repeatPassword.sendKeys(password);
+        _firstCheck.click();
+        _secondCheck.click();
+        _signUp.click();
+
         WebElement successRegister = (new WebDriverWait(WD, Duration.ofSeconds(10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.
                         xpath("//div[@class='success-register__wrapper']"))));
         Assert.assertTrue(successRegister.isDisplayed());
-
         return this;
     }
 
-    public RegistrationPage checkWrongRepeatedPassword() {
-        Assert.assertTrue(WD.findElement(By.xpath("//span[text()='*Passwords do not match']")).
+    public RegistrationPage wrongRegistration(String username, String password) {
+        _username.sendKeys(username);
+        _password.sendKeys(password);
+        _repeatPassword.sendKeys(password + "1");
+        _firstCheck.click();
+        _secondCheck.click();
+        _signUp.click();
+
+        Assert.assertTrue(WD.findElement(By.xpath("//span[@class='input__error-text']")).
                 isDisplayed());
-
         return this;
     }
 
-    public RegistrationPage checkSignUpButtonDisabled(){
-        Assert.assertEquals(signUp.getAttribute("disabled"), "true");
+    public RegistrationPage checkRegistrationCheckBox() {
+        Assert.assertEquals(_signUp.getAttribute("disabled"), "true");
 
+        _firstCheck.click();
+        Assert.assertEquals(_signUp.getAttribute("disabled"), "true");
+
+        _secondCheck.click();
+        _firstCheck.click();
+        Assert.assertEquals(_signUp.getAttribute("disabled"), "true");
         return this;
     }
 
-    public RegistrationPage checkSignUpButtonEnabled(){
-        Assert.assertEquals(signUp.getAttribute("enabled"), "true");
+    public RegistrationPage checkSameUserNameRegistration(String username, String password) throws InterruptedException {
+        _username.sendKeys(username);
+        _password.sendKeys(password);
+        _repeatPassword.sendKeys(password);
+        _firstCheck.click();
+        _secondCheck.click();
+        _signUp.click();
 
-        return this;
-    }
-
-    public RegistrationPage checkSameUserNameAllert(String uName) throws InterruptedException {
         Thread.sleep(1000);
         Assert.assertEquals(WD.switchTo().alert().getText(),
-                String.format("Account with username %s already exists!", uName));
-        WD.switchTo().alert().accept();
-
+                String.format("Account with username %s already exists!", username));
         return this;
     }
 }
