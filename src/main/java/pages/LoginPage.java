@@ -1,5 +1,6 @@
 package pages;
 
+import common.WaitElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +22,17 @@ public class LoginPage {
     WebElement login;
     @FindBy(xpath = "//span[@class='password-visibility-icon']")
     WebElement showPassword;
-    By homeLogin = By.xpath("//button[contains(@class,'button btn button--primary-rounded')]");
+    @FindBy(xpath = "//button[contains(@class,'button btn button--primary-rounded')]")
+    WebElement homeLogin;
+    @FindBy(xpath = "//input[@id='username']/following-sibling::span")
+    WebElement wrongUsernameMsg;
+    @FindBy(xpath = "//input[@id='password']/following-sibling::span")
+    WebElement wrongPasswordMsg;
+    @FindBy(xpath = "//span[text()='*Username is required']")
+    WebElement usernameRequireMsg;
+    @FindBy(xpath = "//span[text()='*Password is required']")
+    WebElement passwordRequireMsg;
+
 
     public LoginPage(WebDriver webDriver) {
         this.WD = webDriver;
@@ -29,57 +40,56 @@ public class LoginPage {
     }
 
     public LoginPage openLoginForm() {
-        WebElement loginBtn = (new WebDriverWait(WD, Duration.ofSeconds(10)).
-                until(ExpectedConditions.presenceOfElementLocated(homeLogin)));
-        loginBtn.click();
+        WaitElement.waitToBeClickable(WD, homeLogin).click();
 
         return this;
     }
 
-    public LoginPage enterUsername(String uName){
-        username.clear();
-        username.sendKeys(uName);
+    public LoginPage enterUsername(String username) {
+        this.username.clear();
+        this.username.sendKeys(username);
 
         return this;
     }
 
-    public LoginPage enterPassword(String pswd){
-        password.clear();
-        password.sendKeys(pswd);
+    public LoginPage enterPassword(String password) {
+        this.password.clear();
+        this.password.sendKeys(password);
 
         return this;
     }
 
-    public LoginPage clickLoginButton(){
+    public LoginPage clickLoginButton() {
         login.click();
 
         return this;
     }
 
-    public LoginPage clickShowPassword(){
+    public LoginPage clickShowPassword() {
         showPassword.click();
 
         return this;
     }
 
-    public LoginPage logout(){
+    public LoginPage logout() {
         try {
             WD.findElement(By.xpath("//div[@class='bonus']"));
             WD.findElement(By.xpath("//button[contains(@class,'button btn button--tertiary')]")).click();
-        } catch (Exception e){}
+        } catch (Exception e) {
+        }
         WD.findElement(By.xpath("//i[@class='icon-user']")).click();
         WD.findElement(By.xpath("//button[contains(@class,'button btn button--logout-desktop')]")).click();
 
         return this;
     }
 
-    public LoginPage checkLoginPageWasOpen(){
+    public LoginPage checkLoginPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/login", WD.getCurrentUrl());
 
         return this;
     }
 
-    public LoginPage checkLoginSuccess(){
+    public LoginPage checkLoginSuccess() {
         WebElement userIcon = (new WebDriverWait(WD, Duration.ofSeconds(10)).until(ExpectedConditions.
                 presenceOfElementLocated(By.xpath("//i[@class='icon-user']"))));
         Assert.assertTrue(userIcon.isDisplayed());
@@ -89,7 +99,7 @@ public class LoginPage {
     }
 
     public LoginPage checkWrongPassLogin() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         Assert.assertEquals(WD.switchTo().alert().getText(), "Invalid password");
         WD.switchTo().alert().accept();
 
@@ -97,52 +107,47 @@ public class LoginPage {
     }
 
     public LoginPage checkWrongUserLogin() throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(4000);
         Assert.assertEquals(WD.switchTo().alert().getText(), "Invalid username or password");
         WD.switchTo().alert().accept();
 
         return this;
     }
 
-    public LoginPage checkTextDisplayed(){
+    public LoginPage checkTextDisplayed() {
         Assert.assertEquals(password.getAttribute("type"), "text");
 
         return this;
     }
 
-    public LoginPage checkShowPasswordIconWasChanged(){
+    public LoginPage checkShowPasswordIconWasChanged() {
         Assert.assertEquals(WD.findElement(By.
                         xpath("//span[@class='password-visibility-icon']//i")).
-                getAttribute("class"),"icon-visibility");
+                getAttribute("class"), "icon-visibility");
 
         return this;
     }
 
-    public LoginPage checkUsernameIllegalSymbols(){
-        Assert.assertTrue(WD.findElement(By.xpath("//input[@id='username']/following-sibling::span")).
-                isDisplayed());
+    public LoginPage checkUsernameIllegalSymbols() {
+        Assert.assertTrue(wrongUsernameMsg.isDisplayed());
 
         return this;
     }
 
-    public LoginPage checkPasswordIllegalSymbols(){
-        Assert.assertTrue(WD.findElement(By.
-                        xpath("//input[@id='password']/following-sibling::span")).
-                isDisplayed());
+    public LoginPage checkPasswordIllegalSymbols() {
+        Assert.assertTrue(wrongPasswordMsg.isDisplayed());
 
         return this;
     }
 
-    public LoginPage checkUsernameRequired(){
-        Assert.assertTrue(WD.findElement(By.xpath("//span[text()='*Username is required']")).
-                isDisplayed());
+    public LoginPage checkUsernameRequired() {
+        Assert.assertTrue(usernameRequireMsg.isDisplayed());
 
         return this;
     }
 
-    public LoginPage checkPasswordRequired(){
-        Assert.assertTrue(WD.findElement(By.xpath("//span[text()='*Password is required']")).
-                isDisplayed());
+    public LoginPage checkPasswordRequired() {
+        Assert.assertTrue(passwordRequireMsg.isDisplayed());
 
         return this;
     }

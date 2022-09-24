@@ -1,5 +1,6 @@
 package pages;
 
+import common.WaitElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +26,8 @@ public class RegistrationPage {
     WebElement secondCheck;
     @FindBy(xpath = "//button[text() = 'Sign up']")
     WebElement signUp;
-    By registerBtn = By.xpath("//button[contains(@class,'button btn button--secondary-rounded')]");
+    @FindBy(xpath = "//button[contains(@class,'button btn button--secondary-rounded')]")
+    WebElement register;
 
     public RegistrationPage(WebDriver webDriver) {
         this.WD = webDriver;
@@ -33,30 +35,28 @@ public class RegistrationPage {
     }
 
     public RegistrationPage openRegistrationForm() {
-        WebElement regBtn = (new WebDriverWait(WD, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(registerBtn)));
-        regBtn.click();
+        WaitElement.waitToBeClickable(WD, register).click();
 
         return this;
     }
 
-    public RegistrationPage enterUsername(String uName) {
-        username.clear();
-        username.sendKeys(uName);
+    public RegistrationPage enterUsername(String username) {
+        this.username.clear();
+        this.username.sendKeys(username);
 
         return this;
     }
 
-    public RegistrationPage enterPassword(String pswd) {
-        password.clear();
-        password.sendKeys(pswd);
+    public RegistrationPage enterPassword(String password) {
+        this.password.clear();
+        this.password.sendKeys(password);
 
         return this;
     }
 
-    public RegistrationPage enterRepeatPassword(String pswd) {
+    public RegistrationPage enterRepeatPassword(String password) {
         repeatPassword.clear();
-        repeatPassword.sendKeys(pswd);
+        repeatPassword.sendKeys(password);
 
         return this;
     }
@@ -101,22 +101,43 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkSignUpButtonDisabled(){
+    public RegistrationPage checkSignUpButtonDisabled() {
         Assert.assertEquals(signUp.getAttribute("disabled"), "true");
 
         return this;
     }
 
-    public RegistrationPage checkSignUpButtonEnabled(){
-        Assert.assertEquals(signUp.getAttribute("enabled"), "true");
+    public RegistrationPage checkSignUpButtonEnabled() {
+        Assert.assertEquals(signUp.getAttribute("disabled"), null);
 
         return this;
     }
 
-    public RegistrationPage checkSameUserNameAllert(String uName) throws InterruptedException {
-        Thread.sleep(1000);
+    public RegistrationPage checkUsernameRequired() {
+        Assert.assertTrue(WD.findElement(By.xpath("//span[text()='*Username is required']")).
+                isDisplayed());
+
+        return this;
+    }
+
+    public RegistrationPage checkPasswordRequired() {
+        Assert.assertTrue(WD.findElement(By.xpath("//span[text()='*Password is required']")).
+                isDisplayed());
+
+        return this;
+    }
+
+    public RegistrationPage checkRepeatedPasswordRequired() {
+        Assert.assertTrue(WD.findElement(By.xpath("//span[text()='*Repeat Password is required']")).
+                isDisplayed());
+
+        return this;
+    }
+
+    public RegistrationPage checkSameUserNameAlert(String username) throws InterruptedException {
+        Thread.sleep(2000);
         Assert.assertEquals(WD.switchTo().alert().getText(),
-                String.format("Account with username %s already exists!", uName));
+                String.format("Account with username %s already exists!", username));
         WD.switchTo().alert().accept();
 
         return this;

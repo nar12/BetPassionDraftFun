@@ -11,4 +11,29 @@
             <class name="tests.TestRegistrationPage"/>
         </classes>
     </test>
+    <test name="HomeTests Suite">
+        <classes>
+            <class name="tests.TestHomePage"/>
+        </classes>
+    </test>
+    <test name="GuideTests Suite">
+        <classes>
+            <class name="tests.TestGuidePage"/>
+        </classes>
+    </test>
+    <test name="NewsTests Suite">
+        <classes>
+            <class name="tests.TestNewsPage"/>
+        </classes>
+    </test>
+    <test name="RulesTests Suite">
+        <classes>
+            <class name="tests.TestRulesPage"/>
+        </classes>
+    </test>
+    <test name="TournamentsTests Suite">
+        <classes>
+            <class name="tests.TestTournamentPage"/>
+        </classes>
+    </test>
 </suite>

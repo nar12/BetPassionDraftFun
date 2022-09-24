@@ -1,29 +1,22 @@
 package tests;
 
+import common.Config;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.BetPass;
 import pages.LoginPage;
+import common.Constants;
 
 public class TestLoginPage {
     public static WebDriver webDriver;
     public LoginPage loginPage;
 
     public BetPass betPass;
-    String username = "nar12";
-    String wrongUsername = "nar121";
-    String password = "asd456";
-    String wrongPassword = "asd4561";
+
 
     @BeforeClass
     public void startBrowser() {
-        System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
-        webDriver = new ChromeDriver();
-        webDriver.manage().window().maximize();
+        webDriver = Config.createWebDriver();
         betPass = new BetPass(webDriver);
         loginPage = new LoginPage(webDriver);
     }
@@ -34,54 +27,54 @@ public class TestLoginPage {
                 openBetPassSite();
     }
 
-    @Test
+    @Test(description = "Check Login page was open")
     public void openLoginPage() {
         loginPage.
                 openLoginForm().
                 checkLoginPageWasOpen();
     }
 
-    @Test
+    @Test(description = "Check correct login")
     public void correctLogin() {
         loginPage.
                 openLoginForm().
-                enterUsername(username).
-                enterPassword(password).
+                enterUsername(Constants.USERNAME).
+                enterPassword(Constants.PASSWORD).
                 clickLoginButton().
                 checkLoginSuccess().
                 logout();
     }
 
-    @Test
+    @Test(description = "Check login with wrong password")
     public void wrongPassLogin() throws InterruptedException {
         loginPage.
                 openLoginForm().
-                enterUsername(username).
-                enterPassword(wrongPassword).
+                enterUsername(Constants.USERNAME).
+                enterPassword(Constants.WRONG_PASSWORD).
                 clickLoginButton().
                 checkWrongPassLogin();
     }
 
-    @Test
+    @Test(description = "Check login with wrong username")
     public void wrongUserLogIn() throws InterruptedException {
         loginPage.
                 openLoginForm().
-                enterUsername(wrongUsername).
-                enterPassword(password).
+                enterUsername(Constants.WRONG_USERNAME).
+                enterPassword(Constants.USERNAME).
                 clickLoginButton().
                 checkWrongUserLogin();
     }
 
-    @Test
+    @Test(description = "Check showPassword was working correct")
     public void checkPasswordShow() {
         loginPage.openLoginForm().
-                enterPassword(password).
+                enterPassword(Constants.PASSWORD).
                 clickShowPassword().
                 checkTextDisplayed().
                 checkShowPasswordIconWasChanged();
     }
 
-    @Test
+    @Test(description = "Check login with illegal parameters")
     public void loginWithIllegalParameters() {
         loginPage.
                 openLoginForm().
@@ -92,12 +85,17 @@ public class TestLoginPage {
                 checkPasswordIllegalSymbols();
     }
 
-    @Test
+    @Test(description = "Check login without parameters")
     public void loginWithoutParameters() {
         loginPage.
                 openLoginForm().
                 clickLoginButton().
                 checkUsernameRequired().
                 checkPasswordRequired();
+    }
+
+    @AfterTest
+    public void closeBrowser() {
+        webDriver.quit();
     }
 }

@@ -1,26 +1,23 @@
 package tests;
 
+import common.Config;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.BetPass;
 import pages.RegistrationPage;
+import common.Constants;
 
 public class TestRegistrationPage {
     public static WebDriver webDriver;
     public RegistrationPage registrationPage;
     public BetPass betPass;
-    String username = "nar12";
-    String password = "asd456";
-    String wrongPassword = "asd4561";
 
     @BeforeClass
     public void startBrowser() {
-        System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
-        webDriver = new ChromeDriver();
-        webDriver.manage().window().maximize();
+        webDriver = Config.createWebDriver();
         registrationPage = new RegistrationPage(webDriver);
         betPass = new BetPass(webDriver);
     }
@@ -37,27 +34,27 @@ public class TestRegistrationPage {
                 openRegistrationForm();
     }
 
-    @Test
+    /*@Test
     public void registration() {
         registrationPage.
                 openRegistrationForm().
-                enterUsername(username).
-                enterPassword(password).
-                enterRepeatPassword(password).
+                enterUsername(Constants.USERNAME).
+                enterPassword(Constants.PASSWORD).
+                enterRepeatPassword(Constants.PASSWORD).
                 clickFirstCheck().
                 clickSecondCheck().
                 clickSignUpButton().
                 checkRegistrationSuccess();
-    }
+    }*/
 
     @Test
     public void wrongRepeatedPasswordRegister() {
 
         registrationPage.
                 openRegistrationForm().
-                enterUsername(username).
-                enterPassword(password).
-                enterRepeatPassword(wrongPassword).
+                enterUsername(Constants.USERNAME).
+                enterPassword(Constants.PASSWORD).
+                enterRepeatPassword(Constants.WRONG_PASSWORD).
                 clickFirstCheck().
                 clickSecondCheck().
                 clickSignUpButton().
@@ -80,12 +77,32 @@ public class TestRegistrationPage {
     public void checkSameUserNameRegister() throws InterruptedException {
         registrationPage.
                 openRegistrationForm().
-                enterUsername(username).
-                enterPassword(password).
-                enterRepeatPassword(password).
+                enterUsername(Constants.USERNAME).
+                enterPassword(Constants.PASSWORD).
+                enterRepeatPassword(Constants.PASSWORD).
                 clickFirstCheck().
                 clickSecondCheck().
                 clickSignUpButton().
-                checkSameUserNameAllert(username);
+                checkSameUserNameAlert(Constants.USERNAME);
+    }
+
+    @Test(description = "check registration without parameters but with checked checkboxes")
+    public void checkRegistrationWithoutParametersAndCheckedBoxes() {
+        registrationPage.
+                openRegistrationForm().
+                checkRegPageWasOpen().
+                checkSignUpButtonDisabled().
+                clickFirstCheck().
+                clickSecondCheck().
+                checkSignUpButtonEnabled().
+                clickSignUpButton().
+                checkUsernameRequired().
+                checkPasswordRequired().
+                checkRepeatedPasswordRequired();
+    }
+
+    @AfterTest
+    public void closeBrowser() {
+        webDriver.quit();
     }
 }
