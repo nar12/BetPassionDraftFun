@@ -1,36 +1,31 @@
 package pages;
 
 import common.WaitElement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
 
 public class GuidePage {
     WebDriver WD;
     @FindBy(xpath = "//a[@href='/guide']")
-    WebElement guide;
+    WebElement guideBtn;
     @FindBy(xpath = "//div[@class='guide__body']")
     WebElement guideWrap;
-    @FindBy(xpath = "//div[contains(@class,'dropdown-item__title btn')]//span[text()='How many places are awarded?']")
+    @FindBy(xpath = "//div[@class='dropdown-item__title btn']//span[text()='How many places are awarded?']")
     WebElement firstDropDown;
-    @FindBy(xpath = "//div[contains(@class,'dropdown-item__title btn')]//span[text()='How long do casino tournaments last?']")
+    @FindBy(xpath = "//div[@class='dropdown-item__title btn']//span[text()='How long do casino tournaments last?']")
     WebElement secondDropDown;
-    @FindBy(xpath = "//div[contains(@class,'dropdown-item__title btn')]//span[text()='What happens in the event of a tie? ']")
+    @FindBy(xpath = "//div[@class='dropdown-item__title btn']//span[text()='What happens in the event of a tie? ']")
     WebElement thirdDropDown;
-    @FindBy(xpath = "//div[contains(@class,'dropdown-item__title btn')]//span[text()='How to participate in a tournament']")
+    @FindBy(xpath = "//div[@class='dropdown-item__title btn']//span[text()='How to participate in a tournament']")
     WebElement fourthDropDown;
-    @FindBy(xpath = "//div[contains(@class,'dropdown-item__title btn')]//span[text()='Buy-in Types']")
+    @FindBy(xpath = "//div[@class='dropdown-item__title btn']//span[text()='Buy-in Types']")
     WebElement fifthDropDown;
-    @FindBy(xpath = "//div[contains(@class,'dropdown-item__title btn')]//span[text()='Features available for tournaments']")
+    @FindBy(xpath = "//div[@class='dropdown-item__title btn']//span[text()='Features available for tournaments']")
     WebElement sixthDropDown;
-    @FindBy(xpath = "//div[contains(@class,'dropdown-item__title btn')]//span[text()='Prizes']")
+    @FindBy(xpath = "//div[@class='dropdown-item__title btn']//span[text()='Prizes']")
     WebElement seventhDropDown;
     @FindBy(xpath = "//div[@class='dropdown-item__body-text-wrapper']")
     WebElement dropDownText;
@@ -42,7 +37,7 @@ public class GuidePage {
     }
 
     public GuidePage openGuidePage() {
-        WaitElement.waitToBeClickable(WD, guide).click();
+        WaitElement.waitToBeClickable(WD, guideBtn).click();
 
         return this;
     }

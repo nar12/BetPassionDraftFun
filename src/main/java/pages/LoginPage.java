@@ -6,24 +6,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
 
 public class LoginPage {
     public WebDriver WD;
     @FindBy(xpath = "//input[@id='username']")
-    WebElement username;
+    WebElement usernameField;
     @FindBy(xpath = "//input[@id='password']")
-    public WebElement password;
+    WebElement passwordField;
     @FindBy(xpath = "//div[@class='auth__form']//button[text()='Log in']")
-    WebElement login;
+    WebElement loginBtn;
     @FindBy(xpath = "//span[@class='password-visibility-icon']")
-    WebElement showPassword;
-    @FindBy(xpath = "//button[contains(@class,'button btn button--primary-rounded')]")
-    WebElement homeLogin;
+    WebElement showPasswordBtn;
+    @FindBy(xpath = "//span[@class='password-visibility-icon']//i")
+    WebElement showPasswordIcon;
+    @FindBy(xpath = "//button[@class='button btn button--primary-rounded']")
+    WebElement homeLoginBtn;
     @FindBy(xpath = "//input[@id='username']/following-sibling::span")
     WebElement wrongUsernameMsg;
     @FindBy(xpath = "//input[@id='password']/following-sibling::span")
@@ -32,6 +30,8 @@ public class LoginPage {
     WebElement usernameRequireMsg;
     @FindBy(xpath = "//span[text()='*Password is required']")
     WebElement passwordRequireMsg;
+    @FindBy(xpath = "//i[@class='icon-user']")
+    WebElement userIcon;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -40,33 +40,33 @@ public class LoginPage {
     }
 
     public LoginPage openLoginForm() {
-        WaitElement.waitToBeClickable(WD, homeLogin).click();
+        WaitElement.waitToBeClickable(WD, homeLoginBtn).click();
 
         return this;
     }
 
     public LoginPage enterUsername(String username) {
-        this.username.clear();
-        this.username.sendKeys(username);
+        this.usernameField.clear();
+        this.usernameField.sendKeys(username);
 
         return this;
     }
 
     public LoginPage enterPassword(String password) {
-        this.password.clear();
-        this.password.sendKeys(password);
+        this.passwordField.clear();
+        this.passwordField.sendKeys(password);
 
         return this;
     }
 
     public LoginPage clickLoginButton() {
-        login.click();
+        loginBtn.click();
 
         return this;
     }
 
     public LoginPage clickShowPassword() {
-        showPassword.click();
+        showPasswordBtn.click();
 
         return this;
     }
@@ -77,7 +77,7 @@ public class LoginPage {
             WD.findElement(By.xpath("//button[contains(@class,'button btn button--tertiary')]")).click();
         } catch (Exception e) {
         }
-        WD.findElement(By.xpath("//i[@class='icon-user']")).click();
+        userIcon.click();
         WD.findElement(By.xpath("//button[contains(@class,'button btn button--logout-desktop')]")).click();
 
         return this;
@@ -90,8 +90,7 @@ public class LoginPage {
     }
 
     public LoginPage checkLoginSuccess() {
-        WebElement userIcon = (new WebDriverWait(WD, Duration.ofSeconds(10)).until(ExpectedConditions.
-                presenceOfElementLocated(By.xpath("//i[@class='icon-user']"))));
+        WaitElement.waitVisibilityOf(WD,userIcon);
         Assert.assertTrue(userIcon.isDisplayed());
         //Assert.assertEquals(WD.getCurrentUrl(), "https://betpassionfun.draft10.com/home");
 
@@ -115,15 +114,18 @@ public class LoginPage {
     }
 
     public LoginPage checkTextDisplayed() {
-        Assert.assertEquals(password.getAttribute("type"), "text");
+        Assert.assertEquals(passwordField.getAttribute("type"), "text");
 
         return this;
     }
 
-    public LoginPage checkShowPasswordIconWasChanged() {
-        Assert.assertEquals(WD.findElement(By.
-                        xpath("//span[@class='password-visibility-icon']//i")).
-                getAttribute("class"), "icon-visibility");
+    public LoginPage checkShowPasswordIconOnState() {
+        Assert.assertEquals(showPasswordIcon.getAttribute("class"), "icon-visibility");
+
+        return this;
+    }
+    public LoginPage checkShowPasswordIconOffState() {
+        Assert.assertEquals(showPasswordIcon.getAttribute("class"), "icon-visibility-off");
 
         return this;
     }

@@ -3,37 +3,37 @@
 <suite name="BetPass Tests">
     <test name="LoginTests Suite">
         <classes>
-            <class name="tests.TestLoginPage"/>
+            <class name="tests.LoginPageTest"/>
         </classes>
     </test>
     <test name="RegistrationTests Suite">
         <classes>
-            <class name="tests.TestRegistrationPage"/>
+            <class name="tests.RegistrationPageTest"/>
         </classes>
     </test>
     <test name="HomeTests Suite">
         <classes>
-            <class name="tests.TestHomePage"/>
+            <class name="tests.HomePageTest"/>
         </classes>
     </test>
     <test name="GuideTests Suite">
         <classes>
-            <class name="tests.TestGuidePage"/>
+            <class name="tests.GuidePageTest"/>
         </classes>
     </test>
     <test name="NewsTests Suite">
         <classes>
-            <class name="tests.TestNewsPage"/>
+            <class name="tests.NewsPageTest"/>
         </classes>
     </test>
     <test name="RulesTests Suite">
         <classes>
-            <class name="tests.TestRulesPage"/>
+            <class name="tests.RulesPageTest"/>
         </classes>
     </test>
     <test name="TournamentsTests Suite">
         <classes>
-            <class name="tests.TestTournamentPage"/>
+            <class name="tests.TournamentPageTest"/>
         </classes>
     </test>
 </suite>

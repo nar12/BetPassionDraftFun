@@ -1,26 +1,9 @@
 package tests;
 
-import common.Config;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.BetPass;
-import pages.RegistrationPage;
-import common.Constants;
 
-public class TestRegistrationPage {
-    public static WebDriver webDriver;
-    public RegistrationPage registrationPage;
-    public BetPass betPass;
-
-    @BeforeClass
-    public void startBrowser() {
-        webDriver = Config.createWebDriver();
-        registrationPage = new RegistrationPage(webDriver);
-        betPass = new BetPass(webDriver);
-    }
+public class RegistrationPageTest extends BaseTest {
 
     @BeforeMethod
     public void openBetPassSite() {
@@ -38,9 +21,9 @@ public class TestRegistrationPage {
     public void registration() {
         registrationPage.
                 openRegistrationForm().
-                enterUsername(Constants.USERNAME).
-                enterPassword(Constants.PASSWORD).
-                enterRepeatPassword(Constants.PASSWORD).
+                enterUsername(USERNAME).
+                enterPassword(PASSWORD).
+                enterRepeatPassword(PASSWORD).
                 clickFirstCheck().
                 clickSecondCheck().
                 clickSignUpButton().
@@ -52,9 +35,9 @@ public class TestRegistrationPage {
 
         registrationPage.
                 openRegistrationForm().
-                enterUsername(Constants.USERNAME).
-                enterPassword(Constants.PASSWORD).
-                enterRepeatPassword(Constants.WRONG_PASSWORD).
+                enterUsername(USERNAME).
+                enterPassword(PASSWORD).
+                enterRepeatPassword(WRONG_PASSWORD).
                 clickFirstCheck().
                 clickSecondCheck().
                 clickSignUpButton().
@@ -77,13 +60,13 @@ public class TestRegistrationPage {
     public void checkSameUserNameRegister() throws InterruptedException {
         registrationPage.
                 openRegistrationForm().
-                enterUsername(Constants.USERNAME).
-                enterPassword(Constants.PASSWORD).
-                enterRepeatPassword(Constants.PASSWORD).
+                enterUsername(USERNAME).
+                enterPassword(PASSWORD).
+                enterRepeatPassword(PASSWORD).
                 clickFirstCheck().
                 clickSecondCheck().
                 clickSignUpButton().
-                checkSameUserNameAlert(Constants.USERNAME);
+                checkSameUserNameAlert(USERNAME);
     }
 
     @Test(description = "check registration without parameters but with checked checkboxes")
@@ -99,10 +82,5 @@ public class TestRegistrationPage {
                 checkUsernameRequired().
                 checkPasswordRequired().
                 checkRepeatedPasswordRequired();
-    }
-
-    @AfterTest
-    public void closeBrowser() {
-        webDriver.quit();
     }
 }

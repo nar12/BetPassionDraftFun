@@ -1,21 +1,16 @@
 package pages;
 
 import common.WaitElement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
 
 public class NewsPage {
     WebDriver WD;
     @FindBy(xpath = "//a[@href='/news']")
-    WebElement news;
+    WebElement newsBtn;
 
 
     public NewsPage(WebDriver webDriver) {
@@ -24,7 +19,7 @@ public class NewsPage {
     }
 
     public NewsPage openNewsPage() {
-        WaitElement.waitToBeClickable(WD, news).click();
+        WaitElement.waitToBeClickable(WD, newsBtn).click();
 
         return this;
     }

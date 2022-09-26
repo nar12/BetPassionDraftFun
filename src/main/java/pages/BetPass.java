@@ -1,32 +1,28 @@
 package pages;
 
 import common.WaitElement;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
 import java.util.ArrayList;
 
 public class BetPass {
     public WebDriver WD;
     @FindBy(xpath = "//a[@href='/tournament']")
-    WebElement tournament;
+    WebElement tournamentBtn;
     @FindBy(xpath = "//a[@href='/guide']")
-    WebElement guide;
+    WebElement guideBtn;
     @FindBy(xpath = "//a[@href='/news']")
-    WebElement news;
+    WebElement newsBtn;
     @FindBy(xpath = "//a[@href='/rules']")
-    WebElement rules;
-    @FindBy(xpath = "//button[contains(@class,'button btn button--primary-rounded')]")
-    WebElement login;
+    WebElement rulesBtn;
+    @FindBy(xpath = "//button[@class = 'button btn button--primary-rounded']")
+    WebElement loginBtn;
     @FindBy(xpath = "//div[@class='language-selector__flag']")
-    WebElement languages;
+    WebElement languagesBtn;
     @FindBy(xpath = "//div[text()='English']")
     WebElement english;
     @FindBy(xpath = "//div[text()='Italian']")
@@ -38,23 +34,23 @@ public class BetPass {
     @FindBy(xpath = "//div[text()='Spanish']")
     WebElement spanish;
     @FindBy(xpath = "//button[@class='home-page__greeting-content--sign-in-button']")
-    WebElement signUp1000PP;
-    @FindBy(xpath = "//button[contains(@class,'button btn button--secondary-rounded')]")
-    WebElement register;
+    WebElement signUp1000PPBtn;
+    @FindBy(xpath = "//button[@class='button btn button--secondary-rounded']")
+    WebElement registerBtn;
     @FindBy(xpath = "//a[@href='https://www.facebook.com/NoiSiamoPassione']")
-    WebElement facebook;
+    WebElement facebookBtn;
     @FindBy(xpath = "//a[@href='https://www.instagram.com/betpassion.it/']")
-    WebElement instagram;
+    WebElement instagramBtn;
     @FindBy(xpath = "//a[@href='https://t.me/betpassionofficial']")
-    WebElement telegram;
+    WebElement telegramBtn;
     @FindBy(xpath = "//a[@href='https://www.youtube.com/results?search_query=betpassion.info']")
-    WebElement youtube;
+    WebElement youtubeBtn;
     @FindBy(xpath = "//a[@href='https://www.iubenda.com/privacy-policy/30380830/cookie-policy']")
-    WebElement cookiePolicy;
+    WebElement cookiePolicyBtn;
     @FindBy(xpath = "//a[@href='https://www.iubenda.com/privacy-policy/30380830']")
-    WebElement privacyPolicy;
+    WebElement privacyPolicyBtn;
     @FindBy(xpath = "//a[@href='https://www.iubenda.com/termini-e-condizioni/30380830']")
-    WebElement termini;
+    WebElement terminiBtn;
 
     public BetPass(WebDriver webDriver) {
         this.WD = webDriver;
@@ -68,7 +64,7 @@ public class BetPass {
     }
 
     public BetPass openTournamentPage() {
-        WaitElement.waitToBeClickable(WD, tournament).click();
+        WaitElement.waitToBeClickable(WD, tournamentBtn).click();
 
         return this;
     }
@@ -80,7 +76,7 @@ public class BetPass {
     }
 
     public BetPass openGuidePage() {
-        WaitElement.waitToBeClickable(WD, guide).click();
+        WaitElement.waitToBeClickable(WD, guideBtn).click();
 
         return this;
     }
@@ -92,7 +88,7 @@ public class BetPass {
     }
 
     public BetPass openNewsPage() {
-        WaitElement.waitToBeClickable(WD, news).click();
+        WaitElement.waitToBeClickable(WD, newsBtn).click();
 
         return this;
     }
@@ -104,7 +100,7 @@ public class BetPass {
     }
 
     public BetPass openRulesPage() {
-        WaitElement.waitToBeClickable(WD, rules).click();
+        WaitElement.waitToBeClickable(WD, rulesBtn).click();
 
         return this;
     }
@@ -116,7 +112,7 @@ public class BetPass {
     }
 
     public BetPass openLoginForm() {
-        WaitElement.waitToBeClickable(WD, login).click();
+        WaitElement.waitToBeClickable(WD, loginBtn).click();
 
         return this;
     }
@@ -128,13 +124,13 @@ public class BetPass {
     }
 
     public BetPass openRegistrationForm() {
-        WaitElement.waitToBeClickable(WD, register).click();
+        WaitElement.waitToBeClickable(WD, registerBtn).click();
 
         return this;
     }
 
     public BetPass openLanguagesList() {
-        WaitElement.waitToBeClickable(WD, languages).click();
+        WaitElement.waitToBeClickable(WD, languagesBtn).click();
 
         return this;
     }
@@ -177,100 +173,100 @@ public class BetPass {
     }
 
     public BetPass checkEnglishLanguage() throws InterruptedException {
-        WaitElement.waitVisibilityOf(WD, login);
-        Thread.sleep(350);
-        Assert.assertEquals(login.getAttribute("innerText"), "Log In");
+        WaitElement.waitVisibilityOf(WD, loginBtn);
+        Thread.sleep(750);
+        Assert.assertEquals(loginBtn.getAttribute("innerText"), "Log In");
 
         return this;
     }
 
     public BetPass checkItalianLanguage() throws InterruptedException {
-        WaitElement.waitVisibilityOf(WD, login);
-        Thread.sleep(350);
-        Assert.assertEquals(login.getAttribute("innerText"), "Accedi");
+        WaitElement.waitVisibilityOf(WD, loginBtn);
+        Thread.sleep(750);
+        Assert.assertEquals(loginBtn.getAttribute("innerText"), "Accedi");
 
         return this;
     }
 
     public BetPass checkJapaneseLanguage() throws InterruptedException {
-        WaitElement.waitVisibilityOf(WD, login);
-        Thread.sleep(350);
-        Assert.assertEquals(login.getAttribute("innerText"), "ログイ");
+        WaitElement.waitVisibilityOf(WD, loginBtn);
+        Thread.sleep(750);
+        Assert.assertEquals(loginBtn.getAttribute("innerText"), "ログイ");
 
         return this;
     }
 
     public BetPass checkTurkishLanguage() throws InterruptedException {
-        WaitElement.waitVisibilityOf(WD, login);
-        Thread.sleep(350);
-        Assert.assertEquals(login.getAttribute("innerText"), "Giris");
+        WaitElement.waitVisibilityOf(WD, loginBtn);
+        Thread.sleep(750);
+        Assert.assertEquals(loginBtn.getAttribute("innerText"), "Giris");
 
         return this;
     }
 
     public BetPass checkSpanishLanguage() throws InterruptedException {
-        WaitElement.waitVisibilityOf(WD, login);
-        Thread.sleep(350);
-        Assert.assertEquals(login.getAttribute("innerText"), "Entrar");
+        WaitElement.waitVisibilityOf(WD, loginBtn);
+        Thread.sleep(750);
+        Assert.assertEquals(loginBtn.getAttribute("innerText"), "Entrar");
 
         return this;
     }
 
     public BetPass clickSignUp1000PP() {
-        WaitElement.waitToBeClickable(WD, signUp1000PP).click();
+        WaitElement.waitToBeClickable(WD, signUp1000PPBtn).click();
 
         return this;
     }
 
     public BetPass clickFacebook() {
-        WaitElement.waitToBeClickable(WD, facebook).click();
+        WaitElement.waitToBeClickable(WD, facebookBtn).click();
 
         return this;
     }
 
 
     public BetPass clickInstagram() {
-        WaitElement.waitToBeClickable(WD, instagram).click();
+        WaitElement.waitToBeClickable(WD, instagramBtn).click();
 
         return this;
     }
 
 
     public BetPass clickTelegram() {
-        WaitElement.waitToBeClickable(WD, telegram).click();
+        WaitElement.waitToBeClickable(WD, telegramBtn).click();
 
         return this;
     }
 
 
     public BetPass clickYoutube() {
-        WaitElement.waitToBeClickable(WD, youtube).click();
+        WaitElement.waitToBeClickable(WD, youtubeBtn).click();
         return this;
     }
 
 
     public BetPass clickCookiePolicy() {
-        WaitElement.waitToBeClickable(WD, cookiePolicy).click();
+        WaitElement.waitToBeClickable(WD, cookiePolicyBtn).click();
 
         return this;
     }
 
 
     public BetPass clickPrivacyPolice() {
-        WaitElement.waitToBeClickable(WD, privacyPolicy).click();
+        WaitElement.waitToBeClickable(WD, privacyPolicyBtn).click();
 
         return this;
     }
 
 
     public BetPass clickTermini() {
-        WaitElement.waitToBeClickable(WD, termini).click();
+        WaitElement.waitToBeClickable(WD, terminiBtn).click();
 
         return this;
     }
 
     public BetPass checkMediaPageWasOpen(String url) {
-        ArrayList<String> tabs = new ArrayList<String>(WD.getWindowHandles());
+        ArrayList<String> tabs = new ArrayList<>(WD.getWindowHandles());
         WD.switchTo().window(tabs.get(1));
         Assert.assertEquals(WD.getCurrentUrl(), url);
         WD.close();

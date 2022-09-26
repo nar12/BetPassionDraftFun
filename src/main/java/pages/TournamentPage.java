@@ -2,16 +2,11 @@ package pages;
 
 import common.WaitElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
 
 public class TournamentPage {
     WebDriver WD;
@@ -20,20 +15,20 @@ public class TournamentPage {
     @FindBy(xpath = "//iframe[@class='social-tournament']")
     WebElement iframe;
     @FindBy(xpath = "//div[@title='gameType']")
-    WebElement gameType;
+    WebElement gameTypeFilter;
     @FindBy(xpath = "//div[@title='tournamentType']")
-    WebElement tournamentType;
+    WebElement tournamentTypeFilter;
     @FindBy(xpath = "//div[@title='status']")
-    WebElement status;
+    WebElement statusFilter;
     @FindBy(xpath = "//div[@title='buyIn']")
-    WebElement buyInType;
+    WebElement buyInTypeFilter;
     @FindBy(xpath = "//span[text()='Freeroll']/following-sibling::div[@class='checkbox']")
     WebElement freerollCheckbox;
     @FindBy(xpath = "//span[text()='regular']/following-sibling::div[@class='checkbox']")
     WebElement regularCheckbox;
 
-    @FindBy(xpath = "//span[text()='873']//..//..//..//..//div[@class='tournament-button-state']//button")
-    WebElement tournament;
+    //@FindBy(xpath = "//span[text()='873']//..//..//..//..//div[@class='tournament-button-state']//button")
+    //WebElement tournament;
 
 
     public TournamentPage(WebDriver webDriver) {
@@ -56,7 +51,7 @@ public class TournamentPage {
     public TournamentPage openGameTypeFilter() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
-        gameType.click();
+        gameTypeFilter.click();
 
         return this;
     }
@@ -64,7 +59,7 @@ public class TournamentPage {
     public TournamentPage openStatusFilter() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
-        status.click();
+        statusFilter.click();
 
         return this;
     }
@@ -72,7 +67,7 @@ public class TournamentPage {
     public TournamentPage openBuyInFilter() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
-        buyInType.click();
+        buyInTypeFilter.click();
 
         return this;
     }
@@ -80,7 +75,7 @@ public class TournamentPage {
     public TournamentPage openTournamentTypeFilter() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
-        tournamentType.click();
+        tournamentTypeFilter.click();
 
         return this;
     }

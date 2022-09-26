@@ -1,26 +1,7 @@
 package tests;
 
-import common.Config;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import pages.BetPass;
-import pages.LoginPage;
-import common.Constants;
-
-public class TestLoginPage {
-    public static WebDriver webDriver;
-    public LoginPage loginPage;
-
-    public BetPass betPass;
-
-
-    @BeforeClass
-    public void startBrowser() {
-        webDriver = Config.createWebDriver();
-        betPass = new BetPass(webDriver);
-        loginPage = new LoginPage(webDriver);
-    }
-
+public class LoginPageTest extends BaseTest {
     @BeforeMethod
     public void openBetPassSite() {
         betPass.
@@ -38,8 +19,8 @@ public class TestLoginPage {
     public void correctLogin() {
         loginPage.
                 openLoginForm().
-                enterUsername(Constants.USERNAME).
-                enterPassword(Constants.PASSWORD).
+                enterUsername(USERNAME).
+                enterPassword(PASSWORD).
                 clickLoginButton().
                 checkLoginSuccess().
                 logout();
@@ -49,8 +30,8 @@ public class TestLoginPage {
     public void wrongPassLogin() throws InterruptedException {
         loginPage.
                 openLoginForm().
-                enterUsername(Constants.USERNAME).
-                enterPassword(Constants.WRONG_PASSWORD).
+                enterUsername(USERNAME).
+                enterPassword(WRONG_PASSWORD).
                 clickLoginButton().
                 checkWrongPassLogin();
     }
@@ -59,8 +40,8 @@ public class TestLoginPage {
     public void wrongUserLogIn() throws InterruptedException {
         loginPage.
                 openLoginForm().
-                enterUsername(Constants.WRONG_USERNAME).
-                enterPassword(Constants.USERNAME).
+                enterUsername(WRONG_USERNAME).
+                enterPassword(USERNAME).
                 clickLoginButton().
                 checkWrongUserLogin();
     }
@@ -68,10 +49,10 @@ public class TestLoginPage {
     @Test(description = "Check showPassword was working correct")
     public void checkPasswordShow() {
         loginPage.openLoginForm().
-                enterPassword(Constants.PASSWORD).
+                enterPassword(PASSWORD).
                 clickShowPassword().
                 checkTextDisplayed().
-                checkShowPasswordIconWasChanged();
+                checkShowPasswordIconOnState();
     }
 
     @Test(description = "Check login with illegal parameters")
@@ -92,10 +73,5 @@ public class TestLoginPage {
                 clickLoginButton().
                 checkUsernameRequired().
                 checkPasswordRequired();
-    }
-
-    @AfterTest
-    public void closeBrowser() {
-        webDriver.quit();
     }
 }

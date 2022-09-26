@@ -1,26 +1,9 @@
 package tests;
 
-import common.Config;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.BetPass;
-import pages.RulesPage;
 
-public class TestRulesPage {
-    public static WebDriver webDriver;
-    public RulesPage rulesPage;
-
-    public BetPass betPass;
-
-    @BeforeClass
-    public void startBrowser() {
-        webDriver = Config.createWebDriver();
-        betPass = new BetPass(webDriver);
-        rulesPage = new RulesPage(webDriver);
-    }
+public class RulesPageTest extends BaseTest{
 
     @BeforeMethod
     public void openBetPassSite() {
@@ -42,10 +25,5 @@ public class TestRulesPage {
                 checkRulesPageWasOpen().
                 checkRulesWrapIsDisplayed().
                 checkTextOfRulesWrap();
-    }
-
-    @AfterTest
-    public void closeBrowser() {
-        webDriver.quit();
     }
 }
