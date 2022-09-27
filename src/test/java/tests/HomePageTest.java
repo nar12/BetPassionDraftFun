@@ -21,7 +21,7 @@ public class HomePageTest extends BaseTest{
                 openLoginForm().checkLoginPageWasOpen().
                 openRegistrationForm().checkRegPageWasOpen();
     }
-    @Test
+    @Test(description = "Check all languages")
     public void checkLanguages() throws InterruptedException {
         betPass.
                 openLanguagesList().chooseEnglishLanguage().checkEnglishLanguage().
@@ -32,13 +32,13 @@ public class HomePageTest extends BaseTest{
 
     }
 
-    @Test
+    @Test(description = "Check bonus login")
     public void clickSignUp1000PP() {
         betPass.
                 clickSignUp1000PP().
                 checkRegPageWasOpen();
     }
-    @Test
+    @Test(description = "Check footer menu")
     public void CheckMediaPages() {
         betPass.
                 clickFacebook().checkMediaPageWasOpen(FACEBOOK_URL).

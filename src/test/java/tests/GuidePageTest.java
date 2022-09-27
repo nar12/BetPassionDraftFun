@@ -18,7 +18,7 @@ public class GuidePageTest extends BaseTest{
                 checkGuidePageWasOpen();
     }
 
-    @Test
+    @Test(description = "Check text of guide wrapper")
     public void checkGuideWrapText() {
         guidePage.
                 openGuidePage().
@@ -27,7 +27,7 @@ public class GuidePageTest extends BaseTest{
                 checkTextOfGuideWrap();
     }
 
-    @Test
+    @Test(description = "Check all dropdowns text")
     public void checkDropDownsText() {
         guidePage.
                 openGuidePage().

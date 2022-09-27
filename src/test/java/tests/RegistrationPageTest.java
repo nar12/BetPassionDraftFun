@@ -11,13 +11,13 @@ public class RegistrationPageTest extends BaseTest {
                 openBetPassSite();
     }
 
-    @Test
+    @Test(description = "Check registration page was open")
     public void openRegistrationPage() {
         registrationPage.
                 openRegistrationForm();
     }
 
-    /*@Test
+    /*@Test(description = "Check correct registration")
     public void registration() {
         registrationPage.
                 openRegistrationForm().
@@ -30,7 +30,7 @@ public class RegistrationPageTest extends BaseTest {
                 checkRegistrationSuccess();
     }*/
 
-    @Test
+    @Test(description = "Check error of wrong repeated password registration")
     public void wrongRepeatedPasswordRegister() {
 
         registrationPage.
@@ -44,7 +44,7 @@ public class RegistrationPageTest extends BaseTest {
                 checkWrongRepeatedPassword();
     }
 
-    @Test
+    @Test(description = "Check resister button disable when checkboxes not checked")
     public void checkRegCheckBox() {
         registrationPage.
                 openRegistrationForm().
@@ -56,7 +56,7 @@ public class RegistrationPageTest extends BaseTest {
                 checkSignUpButtonDisabled();
     }
 
-    @Test
+    @Test(description = "Check exist of username on registration")
     public void checkSameUserNameRegister() throws InterruptedException {
         registrationPage.
                 openRegistrationForm().

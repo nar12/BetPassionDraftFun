@@ -18,7 +18,7 @@ public class RulesPageTest extends BaseTest{
                 checkRulesPageWasOpen();
     }
 
-    @Test
+    @Test(description = "Check text of guide wrappper")
     public void checkGuideWrapText() {
         rulesPage.
                 openRulesPage().

@@ -16,7 +16,7 @@ public class TournamentPageTest extends BaseTest {
                 checkTournamentPageWasOpen();
     }
 
-    @Test
+    @Test(description = "Check freeroll filter of tournaments")
     public void openFreerollsTournaments() throws InterruptedException {
         tournamentPage.
                 openTournamentPage().
@@ -25,7 +25,7 @@ public class TournamentPageTest extends BaseTest {
                 clickTournamentFreerollCheckBox();
     }
 
-    @Test
+    @Test(description = "Check regulat filter of tournaments")
     public void openRegularTournaments() throws InterruptedException {
         tournamentPage.
                 openTournamentPage().
@@ -34,7 +34,7 @@ public class TournamentPageTest extends BaseTest {
                 clickTournamentRegularCheckBox();
     }
 
-    @Test
+    @Test(description = "Registration to tournament")
     public void registrationInTournament() throws InterruptedException {
         loginPage.
                 openLoginForm().
