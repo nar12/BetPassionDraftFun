@@ -1,4 +1,4 @@
-package tests;
+package tests.UI;
 
 import common.Config;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,7 @@ import pages.*;
 public class BaseTest {
     public WebDriver webDriver;
     public GuidePage guidePage;
-    public BetPass betPass;
+    public HomePage homePage;
     public LoginPage loginPage;
     public NewsPage newsPage;
     public RegistrationPage registrationPage;
@@ -26,12 +26,11 @@ public class BaseTest {
     public static final String WRONG_USERNAME = "nar121";
     public static final String PASSWORD = "asd456";
     public static final String WRONG_PASSWORD = "asd4561";
-    public static final String TOURNAMENT_ID = "978";
 
     @BeforeClass
     public void startBrowser() {
         webDriver = Config.createWebDriver();
-        betPass = new BetPass(webDriver);
+        homePage = new HomePage(webDriver);
         guidePage = new GuidePage(webDriver);
         loginPage = new LoginPage(webDriver);
         newsPage = new NewsPage(webDriver);

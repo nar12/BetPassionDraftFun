@@ -1,10 +1,11 @@
-package tests;
+package tests.UI;
 
 import org.testng.annotations.*;
+
 public class LoginPageTest extends BaseTest {
     @BeforeMethod
     public void openBetPassSite() {
-        betPass.
+        homePage.
                 openBetPassSite();
     }
 
@@ -74,4 +75,12 @@ public class LoginPageTest extends BaseTest {
                 checkUsernameRequired().
                 checkPasswordRequired();
     }
+
+    /*@Test
+    public void GoogleAuth() throws InterruptedException {
+        loginPage.
+                openLoginForm().
+                GoogleAuth("betpasstest@gmail.com","Bara077259914").
+                checkLoginSuccess();
+    }*/
 }

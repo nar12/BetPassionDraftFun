@@ -1,4 +1,4 @@
-package tests;
+package tests.UI;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -7,7 +7,7 @@ public class NewsPageTest extends BaseTest{
 
     @BeforeMethod
     public void openBetPassSite() {
-        betPass.
+        homePage.
                 openBetPassSite();
     }
 

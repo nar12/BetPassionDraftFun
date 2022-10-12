@@ -3,37 +3,43 @@
 <suite name="BetPass Tests">
     <test name="LoginTests Suite">
         <classes>
-            <class name="tests.LoginPageTest"/>
+            <class name="tests.UI.LoginPageTest"/>
         </classes>
     </test>
     <test name="RegistrationTests Suite">
         <classes>
-            <class name="tests.RegistrationPageTest"/>
+            <class name="tests.UI.RegistrationPageTest"/>
         </classes>
     </test>
     <test name="HomeTests Suite">
         <classes>
-            <class name="tests.HomePageTest"/>
+            <class name="tests.UI.HomePageTest"/>
         </classes>
     </test>
     <test name="GuideTests Suite">
         <classes>
-            <class name="tests.GuidePageTest"/>
+            <class name="tests.UI.GuidePageTest"/>
         </classes>
     </test>
     <test name="NewsTests Suite">
         <classes>
-            <class name="tests.NewsPageTest"/>
+            <class name="tests.UI.NewsPageTest"/>
         </classes>
     </test>
     <test name="RulesTests Suite">
         <classes>
-            <class name="tests.RulesPageTest"/>
+            <class name="tests.UI.RulesPageTest"/>
         </classes>
     </test>
     <test name="TournamentsTests Suite">
         <classes>
-            <class name="tests.TournamentPageTest"/>
+            <class name="tests.UI.TournamentPageTest"/>
+        </classes>
+    </test>
+    <test name="LoginAPITests Suite">
+        <classes>
+            <class name="tests.API.LoginAPI"/>
         </classes>
     </test>
 </suite>
+

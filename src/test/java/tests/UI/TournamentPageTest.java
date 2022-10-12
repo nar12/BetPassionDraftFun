@@ -1,11 +1,11 @@
-package tests;
+package tests.UI;
 
 import org.testng.annotations.*;
 public class TournamentPageTest extends BaseTest {
 
     @BeforeMethod
     public void openBetPassSite() {
-        betPass.
+        homePage.
                 openBetPassSite();
     }
 
@@ -25,7 +25,7 @@ public class TournamentPageTest extends BaseTest {
                 clickTournamentFreerollCheckBox();
     }
 
-    @Test(description = "Check regulat filter of tournaments")
+    @Test(description = "Check regular filter of tournaments")
     public void openRegularTournaments() throws InterruptedException {
         tournamentPage.
                 openTournamentPage().
@@ -35,7 +35,7 @@ public class TournamentPageTest extends BaseTest {
     }
 
     @Test(description = "Registration to tournament")
-    public void registrationInTournament() throws InterruptedException {
+    public void registrationInFirstTournament() throws InterruptedException {
         loginPage.
                 openLoginForm().
                 enterUsername(USERNAME).
@@ -45,6 +45,6 @@ public class TournamentPageTest extends BaseTest {
         tournamentPage.
                 openTournamentPage().
                 checkTournamentPageWasOpen().
-                registerInTournament(TOURNAMENT_ID);
+                registerInFirstTournament();
     }
 }

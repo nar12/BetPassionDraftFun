@@ -4,6 +4,7 @@ import common.WaitElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -32,6 +33,16 @@ public class LoginPage {
     WebElement passwordRequireMsg;
     @FindBy(xpath = "//i[@class='icon-user']")
     WebElement userIcon;
+    @FindBy(xpath = "//div[@class='S9gUrf-YoZ4jf']")
+    WebElement googleAuthBtn;
+    @FindBy(xpath = "//input[@type='email']")
+    WebElement googleEmailInput;
+    @FindBy(xpath = "//input[@type='password']")
+    WebElement googlePasswordInput;
+    @FindBy(xpath = "//button[@class='VfPpkd-LgbsSe VfPpkd-LgbsSe-OWXEXe-k8QpJ VfPpkd-LgbsSe-OWXEXe-dgl2Hf nCP5yc AjY5Oe DuMIQc LQeN7 qIypjc TrZEUc lw1w4b']")
+    WebElement googleContinueBtn;
+    @FindBy(xpath = "//div[@id='confirm_yes']")
+    WebElement googleConfirmBtn;
 
 
     public LoginPage(WebDriver webDriver) {
@@ -71,6 +82,28 @@ public class LoginPage {
         return this;
     }
 
+    public LoginPage GoogleAuth(String email, String password) throws InterruptedException {
+        googleAuthBtn.click();
+
+        String winHandleBefore = WD.getWindowHandle();
+        for (String winHandle : WD.getWindowHandles()) {
+            WD.switchTo().window(winHandle);
+        }
+
+        googleEmailInput.sendKeys(email);
+        googleContinueBtn.click();
+        Thread.sleep(3000);
+        googlePasswordInput.sendKeys(password);
+        googleContinueBtn.click();
+        Thread.sleep(3000);
+        try {
+            googleConfirmBtn.click();
+        } catch (Exception ex) {}
+        WD.switchTo().window(winHandleBefore);
+
+        return this;
+    }
+
     public LoginPage logout() {
         try {
             WD.findElement(By.xpath("//div[@class='bonus']"));
@@ -90,7 +123,7 @@ public class LoginPage {
     }
 
     public LoginPage checkLoginSuccess() {
-        WaitElement.waitVisibilityOf(WD,userIcon);
+        WaitElement.waitVisibilityOf(WD, userIcon);
         Assert.assertTrue(userIcon.isDisplayed());
         //Assert.assertEquals(WD.getCurrentUrl(), "https://betpassionfun.draft10.com/home");
 
@@ -124,6 +157,7 @@ public class LoginPage {
 
         return this;
     }
+
     public LoginPage checkShowPasswordIconOffState() {
         Assert.assertEquals(showPasswordIcon.getAttribute("class"), "icon-visibility-off");
 

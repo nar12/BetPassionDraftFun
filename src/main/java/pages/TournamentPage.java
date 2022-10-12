@@ -26,6 +26,14 @@ public class TournamentPage {
     WebElement freerollCheckbox;
     @FindBy(xpath = "//span[text()='regular']/following-sibling::div[@class='checkbox']")
     WebElement regularCheckbox;
+    @FindBy(xpath = "//div[@class='tournament-item '][1]//div[@class='tournament-button-state']//button")
+    WebElement firstTournamentRegisterBtn;
+    @FindBy(xpath = "//label[@for='coinBalance']")
+    WebElement coinBalanceCheckBox;
+    @FindBy(xpath = "//div[(@class='modal__buttons ')]//*[text()='Register']")
+    WebElement secondRegisterInTournamentBtn;
+    @FindBy(xpath = "//button[contains(@class,'button button--tertiary')]")
+    WebElement successRegInTourCloseBtn;
 
     //@FindBy(xpath = "//span[text()='873']//..//..//..//..//div[@class='tournament-button-state']//button")
     //WebElement tournament;
@@ -92,19 +100,15 @@ public class TournamentPage {
         return this;
     }
 
-    public TournamentPage registerInTournament(String id) throws InterruptedException {
+    public TournamentPage registerInFirstTournament() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
-        WD.findElement(By.
-                        xpath(String.
-                                format("//span[text()='%s']//..//..//..//..//div[@class='tournament-button-state']//button", id))).
-                click();
 
-        WD.findElement(By.xpath("//label[@for='coinBalance']")).click();
-
-        WD.findElement(By.xpath("//div[(@class='modal__buttons ')]//*[text()='Register']")).click();
+        firstTournamentRegisterBtn.click();
+        coinBalanceCheckBox.click();
+        secondRegisterInTournamentBtn.click();
         Thread.sleep(1000);
-        WD.findElement(By.xpath("//button[contains(@class,'button button--tertiary')]")).click();
+        successRegInTourCloseBtn.click();
         return this;
     }
 }

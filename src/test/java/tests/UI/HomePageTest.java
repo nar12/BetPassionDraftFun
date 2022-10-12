@@ -1,4 +1,4 @@
-package tests;
+package tests.UI;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -7,13 +7,13 @@ public class HomePageTest extends BaseTest{
 
     @BeforeMethod
     public void openSite() {
-        betPass.
+        homePage.
                 openBetPassSite();
     }
 
     @Test(description = "Check main menu pages")
     public void CheckMainPages() {
-        betPass.
+        homePage.
                 openTournamentPage().checkTournamentPageWasOpen().
                 openGuidePage().checkGuidePageWasOpen().
                 openNewsPage().checkNewsPageWasOpen().
@@ -23,24 +23,23 @@ public class HomePageTest extends BaseTest{
     }
     @Test(description = "Check all languages")
     public void checkLanguages() throws InterruptedException {
-        betPass.
-                openLanguagesList().chooseEnglishLanguage().checkEnglishLanguage().
-                openLanguagesList().chooseItalianLanguage().checkItalianLanguage().
-                openLanguagesList().chooseJapaneseLanguage().checkJapaneseLanguage().
-                openLanguagesList().chooseTurkishLanguage().checkTurkishLanguage().
-                openLanguagesList().chooseSpanishLanguage().checkSpanishLanguage();
-
+        homePage.
+                CheckLanguages("Italian").
+                CheckLanguages("English").
+                CheckLanguages("Japanese").
+                CheckLanguages("Turkish").
+                CheckLanguages("Spanish");
     }
 
     @Test(description = "Check bonus login")
     public void clickSignUp1000PP() {
-        betPass.
+        homePage.
                 clickSignUp1000PP().
                 checkRegPageWasOpen();
     }
     @Test(description = "Check footer menu")
     public void CheckMediaPages() {
-        betPass.
+        homePage.
                 clickFacebook().checkMediaPageWasOpen(FACEBOOK_URL).
                 clickInstagram().checkMediaPageWasOpen(INSTAGRAM_URL).
                 clickTelegram().checkMediaPageWasOpen(TELEGRAM_URL).
