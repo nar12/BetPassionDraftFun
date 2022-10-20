@@ -4,6 +4,8 @@ import common.Config;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import pages.*;
 
 public class BaseTest {
@@ -28,8 +30,9 @@ public class BaseTest {
     public static final String WRONG_PASSWORD = "asd4561";
 
     @BeforeClass
-    public void startBrowser() {
-        webDriver = Config.createWebDriver();
+    @Parameters("browser")
+    public void startBrowser(@Optional("Chrome") String browser) {
+        webDriver = Config.createWebDriver(browser);
         homePage = new HomePage(webDriver);
         guidePage = new GuidePage(webDriver);
         loginPage = new LoginPage(webDriver);

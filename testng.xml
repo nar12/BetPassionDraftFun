@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="BetPass Tests">
+<suite name="BetPass Tests"> <!--thread-count="4" parallel="tests"-->
     <test name="LoginTests Suite">
+        <parameter name="browser" value="Firefox" />
         <classes>
             <class name="tests.UI.LoginPageTest"/>
         </classes>
     </test>
     <test name="RegistrationTests Suite">
+        <parameter name="browser" value="Firefox" />
         <classes>
             <class name="tests.UI.RegistrationPageTest"/>
         </classes>
     </test>
     <test name="HomeTests Suite">
+        <parameter name="browser" value="Chrome" />
         <classes>
             <class name="tests.UI.HomePageTest"/>
         </classes>
     </test>
     <test name="GuideTests Suite">
+        <parameter name="browser" value="Chrome" />
         <classes>
             <class name="tests.UI.GuidePageTest"/>
         </classes>
     </test>
     <test name="NewsTests Suite">
+        <parameter name="browser" value="Firefox" />
         <classes>
             <class name="tests.UI.NewsPageTest"/>
         </classes>
     </test>
     <test name="RulesTests Suite">
+        <parameter name="browser" value="Chrome" />
         <classes>
             <class name="tests.UI.RulesPageTest"/>
         </classes>
     </test>
     <test name="TournamentsTests Suite">
+        <parameter name="browser" value="Firefox" />
         <classes>
             <class name="tests.UI.TournamentPageTest"/>
         </classes>
     </test>
     <test name="LoginAPITests Suite">
         <classes>
-            <class name="tests.API.LoginAPI"/>
+            <class name="tests.API.LoginAPITest"/>
         </classes>
     </test>
 </suite>
