@@ -20,15 +20,18 @@ public class LoginAPITest {
 
     @Test
     public void checkSuccessLogin() {
-        /*Specifications.installSpecification(Specifications.requestSpec(URL),Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(URL),Specifications.responseSpecOK200());
+
+        //With POJO class
         RequestLogin requestLogin = new RequestLogin(USERNAME,PASSWORD,"569450","569450");
         ResponseSuccessLoginResult responseSuccessLoginResult = given().
                 body(requestLogin).
                 when().
                 post("/authenticatePlayer").
                 then().extract().body().jsonPath().getObject("result",ResponseSuccessLoginResult.class);
-        Assert.assertEquals(USERNAME,responseSuccessLoginResult.getUsername());*/
+        Assert.assertEquals(USERNAME,responseSuccessLoginResult.getUsername());
 
+        //Without POJO class
         given().
                 contentType(ContentType.JSON).
                 body(new File("src/main/java/jsons/login.json")).
@@ -43,6 +46,7 @@ public class LoginAPITest {
 
     @Test
     public void accessToken() {
+
         String token = given().
                 contentType(ContentType.JSON).
                 body(new File("src/main/java/jsons/login.json")).
@@ -51,6 +55,7 @@ public class LoginAPITest {
                 then().log().all().
                 extract().body().jsonPath().getString("result.token");
         System.out.println(token);
+
         given().
                 contentType(ContentType.JSON).
                 header("x-access-token", token).
