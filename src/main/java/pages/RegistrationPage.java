@@ -1,6 +1,7 @@
 package pages;
 
 import common.WaitElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,12 +44,14 @@ public class RegistrationPage {
         PageFactory.initElements(WD, this);
     }
 
-    public RegistrationPage openRegistrationForm() {
+    @Step("Open registration page")
+    public RegistrationPage openRegistrationPage() {
         WaitElement.waitToBeClickable(WD, registerBtn).click();
 
         return this;
     }
 
+    @Step("Enter username field")
     public RegistrationPage enterUsername(String username) {
         this.usernameField.clear();
         this.usernameField.sendKeys(username);
@@ -56,6 +59,7 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Enter password field")
     public RegistrationPage enterPassword(String password) {
         this.passwordField.clear();
         this.passwordField.sendKeys(password);
@@ -63,6 +67,7 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Enter repeat password field")
     public RegistrationPage enterRepeatPassword(String password) {
         repeatPasswordField.clear();
         repeatPasswordField.sendKeys(password);
@@ -70,84 +75,99 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Click registration button")
     public RegistrationPage clickSignUpButton() {
         signUpBtn.click();
 
         return this;
     }
 
+    @Step("Do first checkbox check")
     public RegistrationPage clickFirstCheck() {
         firstCheckBox.click();
 
         return this;
     }
 
+    @Step("Do second checkbox check")
     public RegistrationPage clickSecondCheck() {
         secondCheckBox.click();
 
         return this;
     }
 
+    @Step("Check registration page was open")
     public RegistrationPage checkRegPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/register", WD.getCurrentUrl());
 
         return this;
     }
 
+    @Step("Check registration success")
     public RegistrationPage checkRegistrationSuccess() {
-        WaitElement.waitVisibilityOf(WD,successRegisterWrap);
+        WaitElement.waitVisibilityOf(WD, successRegisterWrap);
         Assert.assertTrue(successRegisterWrap.isDisplayed());
 
         return this;
     }
-    public RegistrationPage checkUsernameIllegalSymbols() {
+
+    @Step("Check username illegal symbols message")
+    public RegistrationPage checkUsernameIllegalSymbolsMsg() {
         Assert.assertTrue(wrongUsernameMsg.isDisplayed());
 
         return this;
     }
 
-    public RegistrationPage checkPasswordIllegalSymbols() {
+    @Step("Check password illegal symbols message")
+    public RegistrationPage checkPasswordIllegalSymbolsMsg() {
         Assert.assertTrue(wrongPasswordMsg.isDisplayed());
 
         return this;
     }
 
-    public RegistrationPage checkWrongRepeatedPassword() {
+    @Step("Check wrong repeated password message")
+    public RegistrationPage checkWrongRepeatedPasswordMsg() {
         Assert.assertTrue(wrongRepeatedPasswordMsg.isDisplayed());
 
         return this;
     }
 
+    @Step("Check sign up button disabled")
     public RegistrationPage checkSignUpButtonDisabled() {
         Assert.assertEquals(signUpBtn.getAttribute("disabled"), "true");
 
         return this;
     }
 
+    @Step("Check sign up button enabled")
     public RegistrationPage checkSignUpButtonEnabled() {
         Assert.assertEquals(signUpBtn.getAttribute("disabled"), null);
 
         return this;
     }
 
-    public RegistrationPage checkUsernameRequired() {
+    @Step("Check username require message")
+    public RegistrationPage checkUsernameRequiredMsg() {
         Assert.assertTrue(usernameRequireMsg.isDisplayed());
 
         return this;
     }
 
-    public RegistrationPage checkPasswordRequired() {
+    @Step("Check password require message")
+    public RegistrationPage checkPasswordRequiredMsg() {
         Assert.assertTrue(passwordRequireMsg.isDisplayed());
 
         return this;
     }
 
-    public RegistrationPage checkRepeatedPasswordRequired() {
+    @Step("Check repeated password require message")
+    public RegistrationPage checkRepeatedPasswordRequiredMsg() {
         Assert.assertTrue(repeatPasswordRequireMsg.isDisplayed());
 
         return this;
     }
 
+    @Step("Check same username alert")
     public RegistrationPage checkSameUserNameAlert(String username) throws InterruptedException {
         Thread.sleep(2000);
         Assert.assertEquals(WD.switchTo().alert().getText(),

@@ -12,14 +12,14 @@ public class LoginPageTest extends BaseTest {
     @Test(description = "Check Login page was open")
     public void openLoginPage() {
         loginPage.
-                openLoginForm().
+                openLoginPage().
                 checkLoginPageWasOpen();
     }
 
     @Test(description = "Check correct login")
     public void correctLogin() {
         loginPage.
-                openLoginForm().
+                openLoginPage().
                 enterUsername(USERNAME).
                 enterPassword(PASSWORD).
                 clickLoginButton().
@@ -30,7 +30,7 @@ public class LoginPageTest extends BaseTest {
     @Test(description = "Check login with wrong password")
     public void wrongPassLogin() throws InterruptedException {
         loginPage.
-                openLoginForm().
+                openLoginPage().
                 enterUsername(USERNAME).
                 enterPassword(WRONG_PASSWORD).
                 clickLoginButton().
@@ -40,7 +40,7 @@ public class LoginPageTest extends BaseTest {
     @Test(description = "Check login with wrong username")
     public void wrongUserLogIn() throws InterruptedException {
         loginPage.
-                openLoginForm().
+                openLoginPage().
                 enterUsername(WRONG_USERNAME).
                 enterPassword(USERNAME).
                 clickLoginButton().
@@ -49,38 +49,39 @@ public class LoginPageTest extends BaseTest {
 
     @Test(description = "Check showPassword was working correct")
     public void checkPasswordShow() {
-        loginPage.openLoginForm().
+        loginPage.openLoginPage().
                 enterPassword(PASSWORD).
-                clickShowPassword().
-                checkTextDisplayed().
+                clickShowPasswordButton().
+                checkPasswordDisplayed().
                 checkShowPasswordIconOnState();
     }
 
     @Test(description = "Check login with illegal parameters")
     public void loginWithIllegalParameters() {
         loginPage.
-                openLoginForm().
+                openLoginPage().
                 enterUsername("a").
                 enterPassword("$2%").
                 clickLoginButton().
-                checkUsernameIllegalSymbols().
-                checkPasswordIllegalSymbols();
+                checkUsernameIllegalSymbolsMsg().
+                checkPasswordIllegalSymbolsMsg();
     }
 
     @Test(description = "Check login without parameters")
     public void loginWithoutParameters() {
         loginPage.
-                openLoginForm().
+                openLoginPage().
                 clickLoginButton().
-                checkUsernameRequired().
-                checkPasswordRequired();
+                checkUsernameRequiredMsg().
+                checkPasswordRequiredMsg();
     }
 
-    /*@Test
+    @Test
     public void GoogleAuth() throws InterruptedException {
         loginPage.
-                openLoginForm().
+                openLoginPage().
                 GoogleAuth("betpasstest@gmail.com","Bara077259914").
-                checkLoginSuccess();
-    }*/
+                checkLoginSuccess().
+                logout();
+    }
 }

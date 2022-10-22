@@ -1,6 +1,7 @@
 package pages;
 
 import common.WaitElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,18 +45,21 @@ public class TournamentPage {
         PageFactory.initElements(WD, this);
     }
 
+    @Step("Open tournament page")
     public TournamentPage openTournamentPage() {
         WaitElement.waitToBeClickable(WD, tournamentBtn).click();
 
         return this;
     }
 
+    @Step("Check tournament page was open")
     public TournamentPage checkTournamentPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/tournament", WD.getCurrentUrl());
 
         return this;
     }
 
+    @Step("Open game type filter")
     public TournamentPage openGameTypeFilter() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
@@ -64,6 +68,7 @@ public class TournamentPage {
         return this;
     }
 
+    @Step("Open status filter")
     public TournamentPage openStatusFilter() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
@@ -72,6 +77,7 @@ public class TournamentPage {
         return this;
     }
 
+    @Step("Open buy in filter")
     public TournamentPage openBuyInFilter() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
@@ -80,6 +86,7 @@ public class TournamentPage {
         return this;
     }
 
+    @Step("Open tournament type filter")
     public TournamentPage openTournamentTypeFilter() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);
@@ -88,18 +95,21 @@ public class TournamentPage {
         return this;
     }
 
+    @Step("Choose freeroll tournaments")
     public TournamentPage clickTournamentFreerollCheckBox() {
         freerollCheckbox.click();
 
         return this;
     }
 
+    @Step("Choose regular tournaments")
     public TournamentPage clickTournamentRegularCheckBox() {
         regularCheckbox.click();
 
         return this;
     }
 
+    @Step("Registration in first tournament")
     public TournamentPage registerInFirstTournament() throws InterruptedException {
         WD.switchTo().frame(iframe);
         Thread.sleep(2000);

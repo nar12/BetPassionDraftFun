@@ -78,7 +78,7 @@ public class LoginAPITest {
                 body("message.key",equalTo("incorrect_password"));
     }
     @Test
-    public void checkNonExistenUserLogin(){
+    public void checkNonExistenceUserLogin(){
         Specifications.installSpecification(Specifications.requestSpec(URL),Specifications.responseSpecUniq(404));
 
         //With POJO

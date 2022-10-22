@@ -14,7 +14,7 @@ public class RegistrationPageTest extends BaseTest {
     @Test(description = "Check registration page was open")
     public void openRegistrationPage() {
         registrationPage.
-                openRegistrationForm();
+                openRegistrationPage();
     }
 
     /*@Test(description = "Check correct registration")
@@ -34,20 +34,20 @@ public class RegistrationPageTest extends BaseTest {
     public void wrongRepeatedPasswordRegister() {
 
         registrationPage.
-                openRegistrationForm().
+                openRegistrationPage().
                 enterUsername(USERNAME).
                 enterPassword(PASSWORD).
                 enterRepeatPassword(WRONG_PASSWORD).
                 clickFirstCheck().
                 clickSecondCheck().
                 clickSignUpButton().
-                checkWrongRepeatedPassword();
+                checkWrongRepeatedPasswordMsg();
     }
 
     @Test(description = "Check resister button disable when checkboxes not checked")
     public void checkRegCheckBox() {
         registrationPage.
-                openRegistrationForm().
+                openRegistrationPage().
                 checkSignUpButtonDisabled().
                 clickFirstCheck().
                 checkSignUpButtonDisabled().
@@ -59,7 +59,7 @@ public class RegistrationPageTest extends BaseTest {
     @Test(description = "Check exist of username on registration")
     public void checkSameUserNameRegister() throws InterruptedException {
         registrationPage.
-                openRegistrationForm().
+                openRegistrationPage().
                 enterUsername(USERNAME).
                 enterPassword(PASSWORD).
                 enterRepeatPassword(PASSWORD).
@@ -72,15 +72,15 @@ public class RegistrationPageTest extends BaseTest {
     @Test(description = "check registration without parameters but with checked checkboxes")
     public void checkRegistrationWithoutParametersAndCheckedBoxes() {
         registrationPage.
-                openRegistrationForm().
+                openRegistrationPage().
                 checkRegPageWasOpen().
                 checkSignUpButtonDisabled().
                 clickFirstCheck().
                 clickSecondCheck().
                 checkSignUpButtonEnabled().
                 clickSignUpButton().
-                checkUsernameRequired().
-                checkPasswordRequired().
-                checkRepeatedPasswordRequired();
+                checkUsernameRequiredMsg().
+                checkPasswordRequiredMsg().
+                checkRepeatedPasswordRequiredMsg();
     }
 }

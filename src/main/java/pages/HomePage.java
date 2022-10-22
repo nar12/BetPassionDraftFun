@@ -1,6 +1,7 @@
 package pages;
 
 import common.WaitElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,16 +25,6 @@ public class HomePage {
     WebElement loginBtn;
     @FindBy(xpath = "//div[@class='language-selector__flag']")
     WebElement languagesBtn;
-    @FindBy(xpath = "//div[text()='English']")
-    WebElement english;
-    @FindBy(xpath = "//div[text()='Italian']")
-    WebElement italian;
-    @FindBy(xpath = "//div[text()='Japanese']")
-    WebElement japanese;
-    @FindBy(xpath = "//div[text()='Turkish']")
-    WebElement turkish;
-    @FindBy(xpath = "//div[text()='Spanish']")
-    WebElement spanish;
     @FindBy(xpath = "//button[@class='home-page__greeting-content--sign-in-button']")
     WebElement signUp1000PPBtn;
     @FindBy(xpath = "//button[@class='button btn button--secondary-rounded']")
@@ -58,101 +49,118 @@ public class HomePage {
         PageFactory.initElements(webDriver, this);
     }
 
+    @Step("Open betpass site")
     public HomePage openBetPassSite() {
         WD.get("https://betpassionfun.draft10.com/");
 
         return this;
     }
 
+    @Step("Open tournament page")
     public HomePage openTournamentPage() {
         WaitElement.waitToBeClickable(WD, tournamentBtn).click();
 
         return this;
     }
 
+    @Step("Check tournament page was open")
     public HomePage checkTournamentPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/tournament", WD.getCurrentUrl());
 
         return this;
     }
 
+    @Step("Open guide page")
     public HomePage openGuidePage() {
         WaitElement.waitToBeClickable(WD, guideBtn).click();
 
         return this;
     }
 
+    @Step("Check guide page was open")
     public HomePage checkGuidePageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/guide", WD.getCurrentUrl());
 
         return this;
     }
 
+    @Step("Open news page")
     public HomePage openNewsPage() {
         WaitElement.waitToBeClickable(WD, newsBtn).click();
 
         return this;
     }
 
+    @Step("Check news page was open")
     public HomePage checkNewsPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/news", WD.getCurrentUrl());
 
         return this;
     }
 
+    @Step("Open rules page")
     public HomePage openRulesPage() {
         WaitElement.waitToBeClickable(WD, rulesBtn).click();
 
         return this;
     }
 
+    @Step("Check rules page was open")
     public HomePage checkRulesPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/rules", WD.getCurrentUrl());
 
         return this;
     }
 
-    public HomePage openLoginForm() {
+    @Step("Open login page")
+    public HomePage openLoginPage() {
         WaitElement.waitToBeClickable(WD, loginBtn).click();
 
         return this;
     }
 
+    @Step("Check login page was open")
     public HomePage checkLoginPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/login", WD.getCurrentUrl());
 
         return this;
     }
 
-    public HomePage openRegistrationForm() {
+    @Step("Open registration page")
+    public HomePage openRegistrationPage() {
         WaitElement.waitToBeClickable(WD, registerBtn).click();
 
         return this;
     }
 
+    @Step("Open language list")
     public HomePage openLanguagesList() {
         WaitElement.waitToBeClickable(WD, languagesBtn).click();
 
         return this;
     }
 
+    @Step("Check registration page was open")
     public HomePage checkRegPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/register", WD.getCurrentUrl());
 
         return this;
     }
-    public HomePage changeLanguage(String language){
+
+    @Step("Change language of the site")
+    public HomePage changeLanguage(String language) {
         openLanguagesList();
-        WD.findElement(By.xpath(String.format("//div[text()='%s']",language))).click();
+        WD.findElement(By.xpath(String.format("//div[text()='%s']", language))).click();
 
         return this;
     }
 
+    @Step("Check current language of the site")
     public HomePage CheckLanguages(String language) throws InterruptedException {
         ArrayList<String> languagesAssertion = new ArrayList<>();
         ArrayList<WebElement> allElements = new ArrayList<>();
         allElements.add(loginBtn);
-        switch(language){
+        switch (language) {
             case "English":
                 languagesAssertion.add("Log In");
                 break;
@@ -174,64 +182,67 @@ public class HomePage {
         changeLanguage(language);
         for (int i = 0; i < allElements.size(); ++i) {
             Thread.sleep(750);
-            Assert.assertEquals((allElements.get(i)).getText(),languagesAssertion.get(i));
+            Assert.assertEquals((allElements.get(i)).getText(), languagesAssertion.get(i));
         }
         return this;
     }
 
+    @Step("Open registration page")
     public HomePage clickSignUp1000PP() {
         WaitElement.waitToBeClickable(WD, signUp1000PPBtn).click();
 
         return this;
     }
 
+    @Step("Open facebook group")
     public HomePage clickFacebook() {
         WaitElement.waitToBeClickable(WD, facebookBtn).click();
 
         return this;
     }
 
-
+    @Step("Open instagram page")
     public HomePage clickInstagram() {
         WaitElement.waitToBeClickable(WD, instagramBtn).click();
 
         return this;
     }
 
-
+    @Step("Open telegram channel")
     public HomePage clickTelegram() {
         WaitElement.waitToBeClickable(WD, telegramBtn).click();
 
         return this;
     }
 
-
+    @Step("Open youtube channel")
     public HomePage clickYoutube() {
         WaitElement.waitToBeClickable(WD, youtubeBtn).click();
         return this;
     }
 
-
+    @Step("Open cookie policy page")
     public HomePage clickCookiePolicy() {
         WaitElement.waitToBeClickable(WD, cookiePolicyBtn).click();
 
         return this;
     }
 
-
+    @Step("Open privacy policy page")
     public HomePage clickPrivacyPolice() {
         WaitElement.waitToBeClickable(WD, privacyPolicyBtn).click();
 
         return this;
     }
 
-
+    @Step("Open termini page")
     public HomePage clickTermini() {
         WaitElement.waitToBeClickable(WD, terminiBtn).click();
 
         return this;
     }
 
+    @Step("Check media pages")
     public HomePage checkMediaPageWasOpen(String url) {
         ArrayList<String> tabs = new ArrayList<>(WD.getWindowHandles());
         WD.switchTo().window(tabs.get(1));

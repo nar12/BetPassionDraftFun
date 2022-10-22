@@ -18,8 +18,8 @@ public class HomePageTest extends BaseTest{
                 openGuidePage().checkGuidePageWasOpen().
                 openNewsPage().checkNewsPageWasOpen().
                 openRulesPage().checkRulesPageWasOpen().
-                openLoginForm().checkLoginPageWasOpen().
-                openRegistrationForm().checkRegPageWasOpen();
+                openLoginPage().checkLoginPageWasOpen().
+                openRegistrationPage().checkRegPageWasOpen();
     }
     @Test(description = "Check all languages")
     public void checkLanguages() throws InterruptedException {

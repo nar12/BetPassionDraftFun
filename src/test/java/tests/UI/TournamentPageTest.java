@@ -37,7 +37,7 @@ public class TournamentPageTest extends BaseTest {
     @Test(description = "Registration to tournament")
     public void registrationInFirstTournament() throws InterruptedException {
         loginPage.
-                openLoginForm().
+                openLoginPage().
                 enterUsername(USERNAME).
                 enterPassword(PASSWORD).
                 clickLoginButton().

@@ -1,10 +1,10 @@
 package pages;
 
 import common.WaitElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -50,12 +50,14 @@ public class LoginPage {
         PageFactory.initElements(WD, this);
     }
 
-    public LoginPage openLoginForm() {
+    @Step("Open login page")
+    public LoginPage openLoginPage() {
         WaitElement.waitToBeClickable(WD, homeLoginBtn).click();
 
         return this;
     }
 
+    @Step("Enter username field")
     public LoginPage enterUsername(String username) {
         this.usernameField.clear();
         this.usernameField.sendKeys(username);
@@ -63,6 +65,7 @@ public class LoginPage {
         return this;
     }
 
+    @Step("Enter password field")
     public LoginPage enterPassword(String password) {
         this.passwordField.clear();
         this.passwordField.sendKeys(password);
@@ -70,18 +73,21 @@ public class LoginPage {
         return this;
     }
 
+    @Step("Click login button")
     public LoginPage clickLoginButton() {
         loginBtn.click();
 
         return this;
     }
 
-    public LoginPage clickShowPassword() {
+    @Step("Click show password button")
+    public LoginPage clickShowPasswordButton() {
         showPasswordBtn.click();
 
         return this;
     }
 
+    @Step("Authentication with google account")
     public LoginPage GoogleAuth(String email, String password) throws InterruptedException {
         googleAuthBtn.click();
 
@@ -98,31 +104,36 @@ public class LoginPage {
         Thread.sleep(3000);
         try {
             googleConfirmBtn.click();
-        } catch (Exception ex) {}
+        } catch (Exception ex) {
+        }
         WD.switchTo().window(winHandleBefore);
 
         return this;
     }
 
+    @Step("Logout from account")
     public LoginPage logout() {
-        try {
-            WD.findElement(By.xpath("//div[@class='bonus']"));
-            WD.findElement(By.xpath("//button[contains(@class,'button btn button--tertiary')]")).click();
-        } catch (Exception e) {
-        }
         userIcon.click();
         WD.findElement(By.xpath("//button[contains(@class,'button btn button--logout-desktop')]")).click();
 
         return this;
     }
 
+    @Step("Check login page was open")
     public LoginPage checkLoginPageWasOpen() {
         Assert.assertEquals("https://betpassionfun.draft10.com/login", WD.getCurrentUrl());
 
         return this;
     }
 
+    @Step("Check login success")
     public LoginPage checkLoginSuccess() {
+        try {
+            WD.findElement(By.xpath("//div[@class='bonus']"));
+            WD.findElement(By.xpath("//button[contains(@class,'button btn button--tertiary')]")).click();
+        } catch (Exception e) {
+        }
+
         WaitElement.waitVisibilityOf(WD, userIcon);
         Assert.assertTrue(userIcon.isDisplayed());
         //Assert.assertEquals(WD.getCurrentUrl(), "https://betpassionfun.draft10.com/home");
@@ -130,6 +141,7 @@ public class LoginPage {
         return this;
     }
 
+    @Step("Check alert with wrong password login")
     public LoginPage checkWrongPassLogin() throws InterruptedException {
         Thread.sleep(2000);
         Assert.assertEquals(WD.switchTo().alert().getText(), "Invalid password");
@@ -138,51 +150,59 @@ public class LoginPage {
         return this;
     }
 
+    @Step("Check alert with wrong username login")
     public LoginPage checkWrongUserLogin() throws InterruptedException {
-        Thread.sleep(4000);
+        Thread.sleep(5000);
         Assert.assertEquals(WD.switchTo().alert().getText(), "Invalid username or password");
         WD.switchTo().alert().accept();
 
         return this;
     }
 
-    public LoginPage checkTextDisplayed() {
+    @Step("Check password displayed")
+    public LoginPage checkPasswordDisplayed() {
         Assert.assertEquals(passwordField.getAttribute("type"), "text");
 
         return this;
     }
 
+    @Step("Check show password 'on' state")
     public LoginPage checkShowPasswordIconOnState() {
         Assert.assertEquals(showPasswordIcon.getAttribute("class"), "icon-visibility");
 
         return this;
     }
 
+    @Step("Check show password 'off' state")
     public LoginPage checkShowPasswordIconOffState() {
         Assert.assertEquals(showPasswordIcon.getAttribute("class"), "icon-visibility-off");
 
         return this;
     }
 
-    public LoginPage checkUsernameIllegalSymbols() {
+    @Step("Check username illegal symbols message")
+    public LoginPage checkUsernameIllegalSymbolsMsg() {
         Assert.assertTrue(wrongUsernameMsg.isDisplayed());
 
         return this;
     }
 
-    public LoginPage checkPasswordIllegalSymbols() {
+    @Step("Check password illegal symbols message")
+    public LoginPage checkPasswordIllegalSymbolsMsg() {
         Assert.assertTrue(wrongPasswordMsg.isDisplayed());
 
         return this;
     }
 
-    public LoginPage checkUsernameRequired() {
+    @Step("Check username require message")
+    public LoginPage checkUsernameRequiredMsg() {
         Assert.assertTrue(usernameRequireMsg.isDisplayed());
 
         return this;
     }
 
-    public LoginPage checkPasswordRequired() {
+    @Step("Check password require message")
+    public LoginPage checkPasswordRequiredMsg() {
         Assert.assertTrue(passwordRequireMsg.isDisplayed());
 
         return this;
