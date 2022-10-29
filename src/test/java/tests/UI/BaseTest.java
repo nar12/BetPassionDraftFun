@@ -1,12 +1,12 @@
 package tests.UI;
 
+import UI.pages.*;
 import common.Config;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import pages.*;
 
 public class BaseTest {
     public WebDriver webDriver;

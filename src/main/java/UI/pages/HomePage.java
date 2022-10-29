@@ -1,4 +1,4 @@
-package pages;
+package UI.pages;
 
 import common.WaitElement;
 import io.qameta.allure.Step;
@@ -49,7 +49,7 @@ public class HomePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    @Step("Open betpass site")
+    @Step("Open BetPass site")
     public HomePage openBetPassSite() {
         WD.get("https://betpassionfun.draft10.com/");
 

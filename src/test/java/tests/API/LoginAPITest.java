@@ -25,14 +25,21 @@ public class LoginAPITest {
         Specifications.installSpecification(Specifications.requestSpec(URL),Specifications.responseSpecOK200());
 
         //With POJO
-        RequestLogin requestLogin = new RequestLogin(USERNAME,PASSWORD,"569450","569450");
+        RequestLogin requestLogin = RequestLogin.
+                builder().
+                username(USERNAME).
+                password(PASSWORD).
+                skinId("569450").
+                parentId("569450").
+                build();
+
         ResponseSuccessLoginResult responseSuccessLoginResult = given().
                 body(requestLogin).
                 when().
                 post("/authenticatePlayer").
                 then().extract().body().jsonPath().getObject("result",ResponseSuccessLoginResult.class);
 
-        Assert.assertEquals(USERNAME,responseSuccessLoginResult.getUsername());
+        Assert.assertEquals(requestLogin.getUsername(),responseSuccessLoginResult.getUsername());
 
         //Without POJO
         given().
@@ -51,7 +58,14 @@ public class LoginAPITest {
         Specifications.installSpecification(Specifications.requestSpec(URL),Specifications.responseSpecError400());
 
         //With POJO
-        RequestLogin requestLogin = new RequestLogin(USERNAME,WRONG_PASSWORD,"569450","569450");
+        RequestLogin requestLogin = RequestLogin.
+                builder().
+                username(USERNAME).
+                password(WRONG_PASSWORD).
+                skinId("569450").
+                parentId("569450").
+                build();
+
         ResponseIncorrectPasswordLogin response = given().
                 body(requestLogin).
                 when().
@@ -82,7 +96,14 @@ public class LoginAPITest {
         Specifications.installSpecification(Specifications.requestSpec(URL),Specifications.responseSpecUniq(404));
 
         //With POJO
-        RequestLogin requestLogin = new RequestLogin(WRONG_USERNAME,WRONG_PASSWORD,"569450","569450");
+        RequestLogin requestLogin = RequestLogin.
+                builder().
+                username(WRONG_USERNAME).
+                password(WRONG_PASSWORD).
+                skinId("569450").
+                parentId("569450").
+                build();
+
         ResponseNonExistentUserLogin response = given().
                 body(requestLogin).
                 when().

@@ -1,4 +1,4 @@
-package pages;
+package UI.pages;
 
 import common.WaitElement;
 import io.qameta.allure.Step;

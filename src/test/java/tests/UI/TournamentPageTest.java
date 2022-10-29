@@ -34,7 +34,7 @@ public class TournamentPageTest extends BaseTest {
                 clickTournamentRegularCheckBox();
     }
 
-    @Test(description = "Registration to tournament")
+    /*@Test(description = "Registration to tournament")
     public void registrationInFirstTournament() throws InterruptedException {
         loginPage.
                 openLoginPage().
@@ -46,5 +46,5 @@ public class TournamentPageTest extends BaseTest {
                 openTournamentPage().
                 checkTournamentPageWasOpen().
                 registerInFirstTournament();
-    }
+    }*/
 }
